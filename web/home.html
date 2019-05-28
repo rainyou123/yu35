@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
     <meta charset="UTF-8">
     <title>商城首页</title>
+    <script>
+        var time;
+        $(function () {
+            alert(1)
+            time=setInterval("showAd()",3000);
+        //    每3秒执行一次showAd（）
+        });
+        function showAd() {
+            $("#img").show(1000);
+            clearInterval(time);
+            setInterval("hideAd()",3000);
+        //    用1秒时间慢慢执行
+        }
+        function hideAd() {
+            $("#img".slideUp(1000));
+        }
+    </script>
     <style>
         #content{
             width: 1250px;
@@ -60,6 +78,7 @@
 </head>
 <body>
     <div id="content">
+        <img src="img/ad_show.jpg" id="img" style="display: none;"/>
         <div id="head" >
             <div><img src="img/logo.png" height="50px"></div>
             <div><img src="img/header.png" height="50px"></div>
