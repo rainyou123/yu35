@@ -13,12 +13,14 @@
         });
         function showAd() {
             $("#img").show(1000);
+            alert(3)
             clearInterval(time);
             setInterval("hideAd()",3000);
         //    用1秒时间慢慢执行
         }
         function hideAd() {
-            $("#img".slideUp(1000));
+            alert(2)
+            $("#img").slideDown(1000);
         }
     </script>
     <style>

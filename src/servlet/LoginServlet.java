@@ -17,10 +17,10 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username=req.getParameter("username");
         String password=req.getParameter("password");
-        login(username,password,resp);
-        System.out.println(username + "," + password);
+        login(username,password,req,resp);
+//        System.out.println(username + "," + password);
     }
-    public void login(String username , String password ,HttpServletResponse resp){
+    public void login(String username , String password ,HttpServletRequest req,HttpServletResponse resp){
         try {
             QueryRunner qr = new QueryRunner(C3P0Utils.getDataSource());
             String sql = "select * from t_user where uname = ? and upassword = ?";
@@ -28,13 +28,21 @@ public class LoginServlet extends HttpServlet {
             //设计编码格式 要不中文可能乱码
             resp.setContentType("text/html;charset=utf-8");
             if(null!=user){
-                resp.getWriter().write("登录成功");
+                //重定向
+//                resp.getWriter().write("登录成功");
+                resp.sendRedirect(req.getContextPath()+ "/index.html");
             }else{
-                resp.getWriter().write("登录失败");
+//                resp.getWriter().write("登录失败");
+            //请求转发
+                req.setCharacterEncoding("utf-8");
+                req.setAttribute("info" , "用户名或密码错误!");
+                req.getRequestDispatcher(req.getContextPath() + "/login.jsp").forward(req , resp);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
             e.printStackTrace();
         }
     }
