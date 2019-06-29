@@ -196,4 +196,17 @@
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/productServlet</url-pattern>
     </servlet-mapping>
+
+
+
+    <!---->
+    <servlet>
+        <servlet-name>ProductInfoServlet</servlet-name>
+        <servlet-class>web.ProductInfoServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductInfoServlet</servlet-name>
+        <url-pattern>/productInfo</url-pattern>
+    </servlet-mapping>
 </web-app>

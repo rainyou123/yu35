@@ -2,6 +2,7 @@
 <%@ page import="domain.Product" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,22 +41,37 @@ body {
 				<li><a href="#">首页</a></li>
 			</ol>
 		</div>
-		<%
-			List<Product> productList =(List<Product>) request.getAttribute("productList");
-			for(Product p:productList){
-			    out.write("<div class=\"col-md-2\" style='height:270px;'>");
-			    out.write("<a href=\"product_info.htm\"> <img src=\""+p.getPimage()+"\"\n" +
-						"\t\t\t\twidth=\"170\" height=\"170\" style=\"display: inline-block;\">");
-				out.write("</a>");
-				out.write("<p>");
-				out.write("<a href=\"product_info.html\" style='color: green'>"+p.getPname()+"</a>");
-				out.write("</p>");
-				out.write("<p>");
-				out.write("<font color=\"#FF0000\">商城价：&yen;"+p.getShop_price()+"</font>");
-				out.write("</p>");
-				out.write("</div>");
-			}
-		%>
+		<%--<%--%>
+			<%--List<Product> productList =(List<Product>) request.getAttribute("productList");--%>
+			<%--for(Product p:productList){--%>
+			    <%--out.write("<div class=\"col-md-2\" style='height:270px;'>");--%>
+			    <%--out.write("<a href=\"product_info.htm\"> <img src=\""+p.getPimage()+"\"\n" +--%>
+						<%--"\t\t\t\twidth=\"170\" height=\"170\" style=\"display: inline-block;\">");--%>
+				<%--out.write("</a>");--%>
+				<%--out.write("<p>");--%>
+				<%--out.write("<a href=\"product_info.html\" style='color: green'>"+p.getPname()+"</a>");--%>
+				<%--out.write("</p>");--%>
+				<%--out.write("<p>");--%>
+				<%--out.write("<font color=\"#FF0000\">商城价：&yen;"+p.getShop_price()+"</font>");--%>
+				<%--out.write("</p>");--%>
+				<%--out.write("</div>");--%>
+			<%--}--%>
+		<%--%>--%>
+		<c:forEach items="${productList}" var="product">
+			<div class="col-md-2" style="height: 270px">
+				<a href="product_info.htm">
+					<img src="${product.pimage}" width="170" height="170" style="display: inline-block;">
+				</a>
+				<p>
+					<a href=${pageContext.request.contextPath}"/productInfo?pid=${product.pid}" style='color: green'>
+						${product.pname}
+					</a>
+				</p>
+				<p>
+					<font color="#FF0000">商城价：&yen;${product.shop_price}</font>
+				</p>
+			</div>
+		</c:forEach>
 	</div>
 
 	<!--分页 -->
